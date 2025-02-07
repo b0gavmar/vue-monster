@@ -117,3 +117,8 @@ button:disabled {
 .log--heal {
   color: green;
 }
+
+.new-game{
+  display: flex;
+  flex-direction: column;
+}

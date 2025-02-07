@@ -20,20 +20,24 @@
       <section id="monster" class="container">
         <h2>Monster Health</h2>
         <div class="healthbar">
-          <div class="healthbar__value"></div>
+          <div class="healthbar__value" :style="{ width: monsterHealth + '%' }"></div>
         </div>
       </section>
       <section id="player" class="container">
         <h2>Your Health</h2>
         <div class="healthbar">
-          <div class="healthbar__value"></div>
+          <div class="healthbar__value" :style="{width: playerHealth + '%'}"></div>
         </div>
       </section>
-      <section id="controls">
+      <section id="controls" v-if="!winner">
         <button @click="playerAttack">ATTACK</button>
-        <button>SPECIAL ATTACK</button>
-        <button>HEAL</button>
-        <button>SURRENDER</button>
+        <button @click="specialAttack">SPECIAL ATTACK</button>
+        <button @click="heal">HEAL</button>
+        <button @click="surrender">SURRENDER</button>
+      </section>
+      <section class="newGame" v-else>
+        <h2>{{winner}}</h2>
+        <button @click="newGame">NEW GAME</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>

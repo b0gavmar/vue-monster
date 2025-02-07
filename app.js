@@ -2,6 +2,8 @@ const app = Vue.createApp({
     data(){
         return{
             monsterHealth: 100,
+            playerHealth: 100,
+            winner: null,
         }
     },
     watch:{
@@ -15,6 +17,33 @@ const app = Vue.createApp({
         playerAttack(){
             const attack = getRandomNumber(5,12);
             this.monsterHealth=Math.max(this.monsterHealth-attack,0);
+        },
+        monsterAttack(){
+            const attack = getRandomNumber(8,12);
+            this.playerHealth=Math.max(this.playerHealth-attack,0);
+        },
+        specialAttack(){
+            const attack = getRandomNumber(10,25);
+            this.monsterHealth = Math.max(this.monsterHealth-attack,0);
+            this.monsterAttack();
+        },
+        heal(){
+            const healValue = getRandomNumber(8,20);
+            this.playerHealth = Math.min(this.playerHealth+healValue,100);
+        },
+        surrender(){
+            this.winner = "Monder won!"
+        },
+        newGame(){
+            this.monsterHealth = 100;
+            this.playerHealth = 100;
+            this.winner = null;
         }
     }
 });
+
+app.mount('#game');
+
+function getRandomNumber(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+}
